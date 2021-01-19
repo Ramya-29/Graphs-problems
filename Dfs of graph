@@ -1,0 +1,24 @@
+class Traversal
+{
+    static boolean [] visited;
+    static ArrayList<Integer> result;
+    static ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> g, int N)
+    {
+       visited=new boolean[N];
+       result = new ArrayList<Integer>();
+       dfs(0,g);
+       return result;
+    }
+    static void dfs(int s,ArrayList<ArrayList<Integer>> g)
+    {
+        if(visited[s]==true){
+            return ;
+        }
+        visited[s]=true;
+        result.add(s);
+        for(Integer nbr: g.get(s))
+        {
+                dfs(nbr,g);
+        }
+    }
+}
