@@ -1,0 +1,58 @@
+public int orangesRotting(int[][] grid) {
+        Queue<int[]> q = new LinkedList<>();
+        int n = grid.length;
+        int m = grid[0].length;
+        int fresh = 0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==2){
+                    q.add(new int[]{i,j});   
+                }
+                if(grid[i][j]==1){
+                    fresh = fresh+1;
+                }
+            }
+        }
+        int fresh_to_rotten = 0;
+        int min = 0;
+        while(!q.isEmpty()){
+            int n1 = q.size();
+            for(int i=0;i<n1;i++){
+                int[] a = q.poll();
+                int x = a[0];
+                int y = a[1];
+                if(x+1 < n && grid[x+1][y]==1){
+                    grid[x+1][y] = 2;
+                    fresh_to_rotten++;
+                    q.add(new int[]{x+1,y});
+                }
+                if(x-1 >= 0 && x-1 <n && grid[x-1][y]==1){
+                    grid[x-1][y]=2;
+                    fresh_to_rotten++;
+                    q.add(new int[]{x-1,y});
+                }
+                if(y+1 < m && grid[x][y+1]==1){
+                    grid[x][y+1]=2;
+                    fresh_to_rotten++;
+                    q.add(new int[]{x,y+1});
+                }
+                if(y-1 >= 0 && y-1 < m && grid[x][y-1]==1){
+                    grid[x][y-1]=2;
+                    fresh_to_rotten++;
+                    q.add(new int[]{x,y-1});
+                }
+            }
+            if(q.size()>0){
+                min++;
+            }
+            
+        }
+        if(fresh_to_rotten == fresh)
+        {
+                return min;
+            }
+            else
+            {
+                return -1;
+            }
+    }
