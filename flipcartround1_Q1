@@ -1,0 +1,25 @@
+
+public String minimum_Number(String N)
+    {
+        // code here
+        int a[] = new int[N.length()];
+       for(int i=0;i<N.length();i++){
+           a[i] = Integer.parseInt(String.valueOf(N.charAt(i)));
+       }
+       Arrays.sort(a);
+       if(a[0] == 0){
+           for(int i=0;i<N.length();i++){
+               if(a[i]!=0){
+                   a[0] = a[i];
+                   a[i] =0;
+                   break;
+               }
+           }
+       }
+       String s = Arrays.toString(a);
+       s = s.replace("[","");
+       s = s.replace("]","");
+       s = s.replace(",","");
+       s = s.replace(" ","");
+       return s;
+    }
