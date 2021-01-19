@@ -1,0 +1,37 @@
+public void func(int image[][],int x,int y,int n,int m,int newcol,int n1){
+        if(x>=0 && x<n && y>=0 && y<m && image[x][y]==n1){
+        if(n1==newcol){
+            image[x][y]=newcol+1000;
+        }
+        else{
+            image[x][y]=newcol;
+        }
+        func(image,x-1,y,n,m,newcol,n1);
+        func(image,x+1,y,n,m,newcol,n1);
+        func(image,x,y-1,n,m,newcol,n1);
+        func(image,x,y+1,n,m,newcol,n1);
+        }
+    }
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        int n=image.length;
+        int m=image[0].length;
+        int n1=image[sr][sc];
+        if(image.length==0){
+            return image;
+        }
+        else{
+            func(image,sr,sc,n,m,newColor,n1);
+            if(newColor==n1){
+                for(int i=0;i<n;i++)
+                {
+                    for(int j=0;j<m;j++)
+                    {
+                        if(image[i][j]==newColor+1000){
+                            image[i][j]=newColor;
+                        }
+                    }
+                }          
+        }
+            return image;
+        }
+    }
