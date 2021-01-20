@@ -1,0 +1,19 @@
+public int isPairPresent(Node root, int target){
+        // code here
+        Map<Integer,Integer> hmap =new HashMap<>(); 
+        sum(root,target,hmap);
+        for (Map.Entry<Integer,Integer> entry : hmap.entrySet())  {
+            if(hmap.containsKey(target-entry.getKey())){
+                return 1;
+            }
+        }
+        return 0;
+    }
+    public void sum(Node root, int target,Map<Integer,Integer> hmap){
+        if(root==null){
+            return ;
+        }
+        hmap.put(root.data,1);
+        sum(root.left,target,hmap);
+        sum(root.right,target,hmap);
+    }
