@@ -1,0 +1,37 @@
+class Solution{
+    private ArrayList<ArrayList<Integer>> adjlist;
+    private boolean[] visited;
+    long solve(int V,int E,int[] Values,int[][] Edges){
+        //code here
+        visited = new boolean[V];
+        adjlist=new ArrayList<>(V);
+        for(int i=0;i<V;i++){
+            adjlist.add(new ArrayList<Integer>());
+        }
+        for(int i=0;i<E;i++){
+            adjlist.get(Edges[i][0]-1).add(Edges[i][1]-1);
+            adjlist.get(Edges[i][1]-1).add(Edges[i][0]-1);
+        }
+        long total =0;
+        long maxsum =0;
+        for(int i=0;i<V;i++){
+            if(!visited[i]){
+                total = sum(i, visited,Values);
+            }
+            maxsum= (long) Math.max(maxsum,total);
+        }
+        return maxsum;
+    }
+    long sum(int i ,boolean[] visited,int[] Values){
+        if(visited[i]){
+            return 0;
+        }
+        long s = Values[i];
+        visited[i] =true;
+        for(int j=0;j<adjlist.get(i).size();j++){
+            int n = adjlist.get(i).get(j);
+            s=s+sum(n,visited,Values);
+        }
+        return s;
+    }
+}
